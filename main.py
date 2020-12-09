@@ -1,9 +1,7 @@
 import pygame
-import math
-from queue import PriorityQueue
 
 WIDTH = 800
-win = pygame.display.set_mode((WIDTH, WIDTH))
+WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("Path Finding Algorithm")
 
 RED = (255, 0, 0)
@@ -50,6 +48,9 @@ class Node:
     def reset(self):
         self.color = WHITE
 
+    def make_start(self):
+        self.color = ORANGE
+
     def make_closed(self):
         self.color = RED
 
@@ -59,7 +60,7 @@ class Node:
     def make_barrier(self):
         self.color = BLACK
 
-    def make_End(self):
+    def make_end(self):
         self.color = TURQUOISE
 
     def make_path(self):
@@ -73,3 +74,100 @@ class Node:
 
     def __lt__(self, other):
         return False
+
+
+def hf(p1, p2):
+    x1, y1 = p1
+    x2, y2 = p2
+    return abs(x1 - x2) + abs(y1 - y2)
+
+
+def make_grid(rows, width):
+    grid = []
+    node_w = width // rows
+    for i in range(rows):
+        grid.append([])
+        for j in range(rows):
+            node = Node(i, j, node_w, rows)
+            grid[i].append(node)
+    return grid
+
+
+def draw_grid(win, rows, width):
+    node_w = width // rows
+    for i in range(rows):
+        pygame.draw.line(win, GREY, (0, i * node_w), (width, i * node_w))
+        for j in range(rows):
+            pygame.draw.line(win, GREY, (j * node_w, 0), (j * node_w, width))
+
+
+def draw(win, grid, rows, width):
+    win.fill(WHITE)
+
+    for row in grid:
+        for node in row:
+            node.draw(win)
+
+    draw_grid(win, rows, width)
+    pygame.display.update()
+
+
+def get_clicked_pos(pos, rows, width):
+    node_w = width // rows
+    y, x = pos
+
+    row = y // node_w
+    col = x // node_w
+
+    return row, col
+
+
+def main(win, width):
+    rows = 50
+    grid = make_grid(rows, width)
+
+    start = None
+    end = None
+
+    run = True
+    started = False
+
+    while run:
+        draw(win, grid, rows, width)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+
+            if started:
+                continue
+
+            if pygame.mouse.get_pressed(3)[0]:
+                pos = pygame.mouse.get_pos()
+                row, col = get_clicked_pos(pos, rows, width)
+                node = grid[row][col]
+                if not start and node != end:
+                    start = node
+                    start.make_start()
+
+                elif not end and node != start:
+                    end = node
+                    end.make_end()
+
+                elif node != end and node != start:
+                    node.make_barrier()
+
+            elif pygame.mouse.get_pressed(3)[2]:
+                pos = pygame.mouse.get_pos()
+                row, col = get_clicked_pos(pos, rows, width)
+                node = grid[row][col]
+                node.reset()
+                if node == start:
+                    start = None
+
+                elif node == end:
+                    end = None
+
+    pygame.quit()
+
+
+main(WIN, WIDTH)
