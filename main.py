@@ -8,7 +8,7 @@ pygame.display.set_caption("Path Finding Algorithm")
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
-BLUE = (0, 255, 0)
+BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -16,6 +16,7 @@ PURPLE = (128, 0, 128)
 ORANGE = (255, 165, 0)
 GREY = (128, 128, 128)
 TURQUOISE = (64, 224, 208)
+BEIGE = (255, 255, 200)
 
 
 class Node:
@@ -33,40 +34,40 @@ class Node:
         return self.row, self.col
 
     def is_closed(self):
-        return self.color == RED
+        return self.color == BEIGE
 
     def is_open(self):
-        return self.color == GREEN
+        return self.color == PURPLE
 
     def is_barrier(self):
         return self.color == BLACK
 
     def is_start(self):
-        return self.color == ORANGE
+        return self.color == RED
 
     def is_end(self):
-        return self.color == TURQUOISE
+        return self.color == GREEN
 
     def reset(self):
         self.color = WHITE
 
     def make_start(self):
-        self.color = ORANGE
-
-    def make_closed(self):
         self.color = RED
 
+    def make_closed(self):
+        self.color = BEIGE
+
     def make_open(self):
-        self.color = GREEN
+        self.color = PURPLE
 
     def make_barrier(self):
         self.color = BLACK
 
     def make_end(self):
-        self.color = TURQUOISE
+        self.color = GREEN
 
     def make_path(self):
-        self.color = PURPLE
+        self.color = BLUE
 
     def draw(self, win):
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
@@ -124,6 +125,7 @@ def algorithm(draw, grid, start, end):
         if current == end:
             recon_path(came_from, end, draw)
             end.make_end()
+            start.make_start()
             return True
 
         for neighbour in current.neighbours:
@@ -160,9 +162,9 @@ def make_grid(rows, width):
 def draw_grid(win, rows, width):
     node_w = width // rows
     for i in range(rows):
-        pygame.draw.line(win, BLACK, (0, i * node_w), (width, i * node_w))
+        pygame.draw.line(win, GREY, (0, i * node_w), (width, i * node_w))
         for j in range(rows):
-            pygame.draw.line(win, BLACK, (j * node_w, 0), (j * node_w, width))
+            pygame.draw.line(win, GREY, (j * node_w, 0), (j * node_w, width))
 
 
 def draw(win, grid, rows, width):
