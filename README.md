@@ -17,3 +17,9 @@ Also you can clean the whole grid by pressing "c"
 [pygame](https://pypi.org/project/pygame/)
 
 [PriorityQueue from queue](https://docs.python.org/3/library/queue.html)
+
+
+## Contributors
+[Amir Alimzhanov](https://github.com/3xxxact)
+
+[Altynai Mamytova](https://github.com/renren-017)
