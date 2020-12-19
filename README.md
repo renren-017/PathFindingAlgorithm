@@ -5,11 +5,13 @@ Our algorithm is based on ["A* search Algorithm"](https://en.wikipedia.org/wiki/
 
 image
 
-On the grid, you put the Starting and Ending Points and set up Barriers by pressing "left mouse button".
+On the grid, you put the Starting and Ending Points and set up Barriers by pressing "left mouse button". Or remove them by pressing "Right mouse button"
 
 image
 
 Then, by pressing "space bar", you start the algorithm. In a short time you'll see the shortest route.
+
+Also you can clean the whole grid by pressing "c"
 
 ## Libraries and Modules used in the project
 [pygame](https://pypi.org/project/pygame/)
