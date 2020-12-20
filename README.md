@@ -29,7 +29,7 @@ Also you can clean the whole grid by pressing "c"
 
 1. Cool project. I guess it looks nice on portfolio, so maybe I'll try to make one by your tutorial. I think visualisation tool is good, but it would've been great to see it perform with other path finding algorithms as well.
 
-2.This is really interesting project. I like the way algorithm works. I think this project deserves 100 points.
+2. This is really interesting project. I like the way algorithm works. I think this project deserves 100 points.
 
 3. I liked the very idea that you decided to visualize the algorithm. It looks cool, and with the explanation, everything is actually easier than it seems.
 
