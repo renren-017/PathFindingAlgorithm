@@ -24,6 +24,8 @@ Also you can clean the whole grid by pressing "c"
 
 [Altynai Mamytova](https://github.com/renren-017)
 
+## main.exe 
+You can find main.exe file in dist\main\main.exe and test it.
 
 ## Feedback
 
